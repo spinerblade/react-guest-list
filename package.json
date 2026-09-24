@@ -23,12 +23,15 @@
   },
   "dependencies": {
     "@upleveled/react-scripts": "5.1.4",
+    "postcss": "^8.5.28",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "sass": "1.104.1"
+    "sass": "1.104.1",
+    "tailwindcss": "^3.4.19"
   },
   "devDependencies": {
     "@jest/globals": "^30.5.1",
+    "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.3",
