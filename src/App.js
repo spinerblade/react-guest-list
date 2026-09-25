@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import AddGuest from './AddGuest';
+import * as Api from './API';
 
 export default function App() {
   const [firstName, setFirstName] = useState('');
@@ -16,7 +17,12 @@ export default function App() {
           event.preventDefault();
           setGuests([
             ...guests,
-            { id: guests.length, firstName: firstName, lastName: lastName },
+            {
+              id: guests.length,
+              firstName: firstName,
+              lastName: lastName,
+              attending: false,
+            },
           ]);
           setFirstName('');
           setLastName('');
@@ -90,6 +96,11 @@ export default function App() {
           <button>Remove</button>
         </form>
       </div>
+      <Api.GetAllUsers />
+      <Api.GetUser />
+      <Api.PostUsers />
+      <Api.UpdateUser />
+      <Api.DeleteUser />
     </>
   );
 }
