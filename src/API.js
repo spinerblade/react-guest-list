@@ -1,143 +1,143 @@
-import { use, useState } from 'react';
+import './index.css';
+import { useState } from 'react';
 
-export function GetAllUsers() {
-  const [allGuests, setAllGuests] = useState([]);
+export function GetAllUsers({ allGuests, setAllGuests }) {
   const baseUrl = 'http://localhost:4000';
+  async function deleteGuest(id) {
+    await fetch(`${baseUrl}/guests/${id}`, {
+      method: 'DELETE',
+    });
+    setAllGuests(allGuests.filter((allGuest) => allGuest.id !== id));
+  }
   return (
-    <>
-      <div>
-        <button
-          onClick={async function getAll() {
-            const response = await fetch(`${baseUrl}/guests`);
-            const guests = await response.json();
-            setAllGuests(guests);
-          }}
-        >
-          Download all guests
-        </button>
-      </div>
-      <div>
-        {allGuests.map((allGuest) => (
-          <div key={allGuest.id}>
-            <span>{allGuest.firstName}</span>
-            <span>{allGuest.lastName}</span>
-            <span>{allGuest.attending ? 'Attending' : 'Not attending'}</span>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-}
-export function GetUser() {
-  const [singleUserFirstName, setSingleUserFirstName] = useState('');
-  const [singleUserLastName, setSingleUserLastName] = useState('');
-  const [singleUser, setSingleUser] = useState({});
-  const baseUrl = 'http://localhost:4000';
-  return (
-    <>
-      <div>
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            setSingleUser({
-              id: 1,
-              firstName: singleUserFirstName,
-              lastName: singleUserLastName,
-              attending: false,
-            });
-          }}
-        >
+    <div data-test-id="guest" className="flex items-end gap-4 mb-6">
+      {allGuests.map((allGuest) => (
+        <div key={allGuest.id}>
+          <h2 className="text-2xl">Guest</h2>
+          <button
+            aria-label={`Remove ${allGuest.firstName} ${allGuest.lastName}`}
+            className="text-red-600 hover:text-red-800 font-bold px-2"
+            onClick={() => deleteGuest(allGuest.id)}
+          >
+            ✕
+          </button>
+          <span>{allGuest.firstName}</span>
+          <span>{allGuest.lastName}</span>
+          <span>{allGuest.attending ? 'Attending' : 'Not attending'}</span>
           <input
-            placeholder="Enter First Name"
-            value={singleUserFirstName}
-            onChange={(event) => {
-              setSingleUserFirstName(event.currentTarget.value);
+            type="checkbox"
+            aria-label={`${allGuest.firstName} ${allGuest.lastName} attending status`}
+            checked={allGuest.attending}
+            onChange={async function (event) {
+              const checked = event.currentTarget.checked;
+              await fetch(`${baseUrl}/guests/${allGuest.id}`, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ attending: checked }),
+              });
+              setAllGuests(
+                allGuests.map((guest) =>
+                  guest.id === allGuest.id
+                    ? { ...guest, attending: checked }
+                    : guest,
+                ),
+              );
             }}
           />
-          <input
-            placeholder="Enter Last Name"
-            value={singleUserLastName}
-            onChange={(event) => {
-              setSingleUserLastName(event.currentTarget.value);
-            }}
-          />
-        </form>
-      </div>
-      <div>
-        <button
-          onClick={async function GetOne() {
-            const response = await fetch(`${baseUrl}/guests/${singleUser.id}`);
-            const guest = await response.json();
-            console.log(guest);
-          }}
-        >
-          Download guest
-        </button>
-      </div>
-    </>
-  );
-}
-
-export function PostUsers() {
-  const baseUrl = 'http://localhost:4000';
-  return (
-    <div>
-      <button
-        onClick={async function Post() {
-          const response = await fetch(`${baseUrl}/guests`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ firstName: 'Karl', lastName: 'Horky' }),
-          });
-          const createdGuest = await response.json();
-          console.log(createdGuest);
-        }}
-      >
-        Create new guest
-      </button>
+        </div>
+      ))}
     </div>
   );
 }
 
-export function UpdateUser() {
+export function DeleteUser({ allGuests, setAllGuests }) {
   const baseUrl = 'http://localhost:4000';
+  const [firstNameRemove, setFirstNameRemove] = useState('');
+  const [lastNameRemove, setLastNameRemove] = useState('');
   return (
-    <div>
-      <button
-        onClick={async function Update() {
-          const response = await fetch(`${baseUrl}/guests/1`, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ attending: true }),
+    <div className="flex items-end gap-4 mb-6">
+      <h2 className="text-2xl text-blue-800">Remove Guest by Name</h2>
+      <form
+        className="flex items-end gap-4 mb-6"
+        onSubmit={async function (event) {
+          event.preventDefault();
+          const guestRemove = allGuests.find((allGuest) => {
+            return (
+              allGuest.firstName === firstNameRemove &&
+              allGuest.lastName === lastNameRemove
+            );
           });
-          const updatedGuest = await response.json();
-          console.log(updatedGuest);
-        }}
-      >
-        Update guest
-      </button>
-    </div>
-  );
-}
+          if (!guestRemove) {
+            console.log('No matching guest found');
+            return;
+          }
 
-export function DeleteUser() {
-  const baseUrl = 'http://localhost:4000';
-  return (
-    <div>
-      <button
-        onClick={async function Delete() {
-          const response = await fetch(`${baseUrl}/guests/1`, {
+          await fetch(`${baseUrl}/guests/${guestRemove.id}`, {
             method: 'DELETE',
           });
-          const deletedGuest = await response.json();
-          console.log(deletedGuest);
+          setAllGuests(
+            allGuests.filter((allGuest) => allGuest.id !== guestRemove.id),
+          );
+          setFirstNameRemove('');
+          setLastNameRemove('');
         }}
       >
-        Delete guest
+        <div className="flex flex-col">
+          <label htmlFor="First Name">Enter First Name</label>
+          <input
+            id="First Name"
+            placeholder="First Name"
+            value={firstNameRemove}
+            onChange={(event) => {
+              setFirstNameRemove(event.currentTarget.value);
+            }}
+          />
+        </div>
+        <div className="flex flex-col">
+          <label htmlFor="Last Name">Enter Last Name</label>
+          <input
+            id="Last Name"
+            placeholder="Last Name"
+            value={lastNameRemove}
+            onChange={(event) => {
+              setLastNameRemove(event.currentTarget.value);
+            }}
+          />
+        </div>
+        <div>
+          <button
+            aria-label={`Remove ${firstNameRemove} ${lastNameRemove}`}
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+          >
+            Remove guest
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+export function DeleteAllUsers({ allGuests, setAllGuests }) {
+  const baseUrl = 'http://localhost:4000';
+
+  return (
+    <div className="flex items-end gap-4 mb-6">
+      <button
+        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+        onClick={async function () {
+          await Promise.all(
+            allGuests.map(async function (allGuest) {
+              await fetch(`${baseUrl}/guests/${allGuest.id}`, {
+                method: 'DELETE',
+              });
+            }),
+          );
+          setAllGuests([]);
+        }}
+      >
+        Delete all guests
       </button>
     </div>
   );
