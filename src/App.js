@@ -39,7 +39,7 @@ export default function App() {
   return (
     <div className="bg-slate-400">
       <h1 className="text-3xl text-blue-800">Enter Guest</h1>
-      {loading && <div>Loading...</div>}
+      {loading && <div className="text-3xl text-red-900">Loading...</div>}
 
       <form
         className="flex items-end gap-4 mb-6"
