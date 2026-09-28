@@ -35,17 +35,11 @@ export default function App() {
     const createdGuest = await response.json();
     return createdGuest;
   }
-  if (loading) {
-    return (
-      <div className="bg-slate-400">
-        <h1 className="text-3xl text-blue-800">Enter Guest</h1>
-        <div>Loading...</div>
-      </div>
-    );
-  }
+
   return (
     <div className="bg-slate-400">
       <h1 className="text-3xl text-blue-800">Enter Guest</h1>
+      {loading && <div>Loading...</div>}
 
       <form
         className="flex items-end gap-4 mb-6"
@@ -64,6 +58,7 @@ export default function App() {
             id="First Name"
             placeholder="First Name"
             value={inputFirstName}
+            disabled={loading}
             onChange={(event) => {
               setInputFirstName(event.currentTarget.value);
             }}
@@ -75,6 +70,7 @@ export default function App() {
             id="Last Name"
             placeholder="Last Name"
             value={inputLastName}
+            disabled={loading}
             onChange={(event) => {
               setInputLastName(event.currentTarget.value);
             }}
@@ -82,7 +78,10 @@ export default function App() {
         </div>
 
         <div>
-          <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+          <button
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+            disabled={loading}
+          >
             Add Guest
           </button>
         </div>
