@@ -15,9 +15,9 @@ export default function App() {
     async function getAll() {
       const response = await fetch(`${baseUrl}/guests`);
       const guests = await response.json();
-      await new Promise((resolve) => {
-        setTimeout(resolve, 2000);
-      }); // artificial 2 second wait for drone test.
+      // await new Promise((resolve) => {
+      //   setTimeout(resolve, 2000);
+      // });
       setAllGuests(guests);
       setLoading(false);
     }
@@ -38,11 +38,14 @@ export default function App() {
     const createdGuest = await response.json();
     return createdGuest;
   }
+  if (loading) {
+    return <div data-test-id="loading">Loading...</div>;
+  }
 
   return (
     <div className="bg-slate-400">
       <h1 className="text-3xl text-blue-800">Enter Guest</h1>
-      {loading && <div className="text-3xl text-red-900">Loading...</div>}
+      {/* {loading && <div className="text-3xl text-red-900">Loading...</div>} */}
 
       <form
         className="flex items-end gap-4 mb-6"
