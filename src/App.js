@@ -39,7 +39,7 @@ export default function App() {
     return createdGuest;
   }
   if (loading) {
-    return <div data-test-id="loading">Loading...</div>;
+    return <div data-test-id="Loading...">Loading...</div>;
   }
 
   return (
