@@ -15,9 +15,9 @@ export default function App() {
     async function getAll() {
       const response = await fetch(`${baseUrl}/guests`);
       const guests = await response.json();
-      // await new Promise((resolve) => {
-      //   setTimeout(resolve, 2000);
-      // });
+      await new Promise((resolve) => {
+        setTimeout(resolve, 2000);
+      });
       setAllGuests(guests);
       setLoading(false);
     }
