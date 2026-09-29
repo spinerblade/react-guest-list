@@ -15,6 +15,9 @@ export default function App() {
     async function getAll() {
       const response = await fetch(`${baseUrl}/guests`);
       const guests = await response.json();
+      await new Promise((resolve) => {
+        setTimeout(resolve, 2000);
+      }); // artificial 2 second wait for drone test.
       setAllGuests(guests);
       setLoading(false);
     }
