@@ -6,7 +6,7 @@ export default function App() {
   const [allGuests, setAllGuests] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const baseUrl = 'http://localhost:4000';
+  const baseUrl = 'https://express-guest-list-api-memory.spinerblade.deno.net';
 
   const [inputFirstName, setInputFirstName] = useState('');
   const [inputLastName, setInputLastName] = useState('');
@@ -15,9 +15,9 @@ export default function App() {
     async function getAll() {
       const response = await fetch(`${baseUrl}/guests`);
       const guests = await response.json();
-      await new Promise((resolve) => {
-        setTimeout(resolve, 2000);
-      });
+      // await new Promise((resolve) => {
+      //   setTimeout(resolve, 2000);
+      // });
       setAllGuests(guests);
       setLoading(false);
     }
@@ -38,14 +38,14 @@ export default function App() {
     const createdGuest = await response.json();
     return createdGuest;
   }
-  if (loading) {
-    return <div data-test-id="Loading...">Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div data-test-id="Loading...">Loading...</div>;
+  // }
 
   return (
     <div className="bg-slate-400">
       <h1 className="text-3xl text-blue-800">Enter Guest</h1>
-      {/* {loading && <div className="text-3xl text-red-900">Loading...</div>} */}
+      {loading && <div className="text-3xl text-red-900">Loading...</div>}
 
       <form
         className="flex items-end gap-4 mb-6"
