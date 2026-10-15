@@ -44,54 +44,59 @@ export default function App() {
 
   return (
     <div className="bg-slate-400">
-      <h1 className="text-3xl text-blue-800">Enter Guest</h1>
-      {loading && <div className="text-3xl text-red-900">Loading...</div>}
+      <div>
+        <h1 className="text-3xl text-blue-800">Enter Guest</h1>
+        {loading && <div className="text-3xl text-red-900">Loading...</div>}
 
-      <form
-        className="flex items-end gap-4 mb-6"
-        onSubmit={async function (event) {
-          event.preventDefault();
-          const createdGuest = await createGuest(inputFirstName, inputLastName);
+        <form
+          className="flex items-end gap-4 mb-6"
+          onSubmit={async function (event) {
+            event.preventDefault();
+            const createdGuest = await createGuest(
+              inputFirstName,
+              inputLastName,
+            );
 
-          setAllGuests([...allGuests, createdGuest]);
-          setInputFirstName('');
-          setInputLastName('');
-        }}
-      >
-        <div className="flex flex-col">
-          <label htmlFor="First Name">Enter First Name</label>
-          <input
-            id="First Name"
-            placeholder="First Name"
-            value={inputFirstName}
-            disabled={loading}
-            onChange={(event) => {
-              setInputFirstName(event.currentTarget.value);
-            }}
-          />
-        </div>
-        <div className="flex flex-col">
-          <label htmlFor="Last Name">Enter Last Name</label>
-          <input
-            id="Last Name"
-            placeholder="Last Name"
-            value={inputLastName}
-            disabled={loading}
-            onChange={(event) => {
-              setInputLastName(event.currentTarget.value);
-            }}
-          />
-        </div>
+            setAllGuests([...allGuests, createdGuest]);
+            setInputFirstName('');
+            setInputLastName('');
+          }}
+        >
+          <div className="flex flex-col">
+            <label htmlFor="First Name">Enter First Name</label>
+            <input
+              id="First Name"
+              placeholder="First Name"
+              value={inputFirstName}
+              disabled={loading}
+              onChange={(event) => {
+                setInputFirstName(event.currentTarget.value);
+              }}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="Last Name">Enter Last Name</label>
+            <input
+              id="Last Name"
+              placeholder="Last Name"
+              value={inputLastName}
+              disabled={loading}
+              onChange={(event) => {
+                setInputLastName(event.currentTarget.value);
+              }}
+            />
+          </div>
 
-        <div>
-          <button
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-            disabled={loading}
-          >
-            Add Guest
-          </button>
-        </div>
-      </form>
+          <div>
+            <button
+              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+              disabled={loading}
+            >
+              Add Guest
+            </button>
+          </div>
+        </form>
+      </div>
       <Api.GetAllUsers allGuests={allGuests} setAllGuests={setAllGuests} />
       <Api.DeleteUser allGuests={allGuests} setAllGuests={setAllGuests} />
       <Api.DeleteAllUsers allGuests={allGuests} setAllGuests={setAllGuests} />

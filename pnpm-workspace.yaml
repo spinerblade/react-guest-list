@@ -12,6 +12,7 @@ minimumReleaseAgeExclude:
   - eslint-config-upleveled
   - stylelint-config-upleveled
   - eslint-plugin-upleveled@3.0.0
+  - eslint-plugin-upleveled
 # Fail on pnpm ignored build scripts
 # - https://pnpm.io/settings#strictdepbuilds
 strictDepBuilds: true

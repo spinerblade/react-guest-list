@@ -21,9 +21,9 @@ export function GetAllUsers({ allGuests, setAllGuests }) {
           >
             ✕
           </button>
-          <span>{allGuest.firstName}</span>
-          <span>{allGuest.lastName}</span>
-          <span>{allGuest.attending ? 'Attending' : 'Not attending'}</span>
+          <div>{allGuest.firstName}</div>
+          <div>{allGuest.lastName}</div>
+          <div>{allGuest.attending ? 'Attending' : 'Not attending'}</div>
           <input
             type="checkbox"
             aria-label={`${allGuest.firstName} ${allGuest.lastName} attending status`}
