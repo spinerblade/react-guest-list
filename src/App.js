@@ -13,7 +13,7 @@ export default function App() {
 
   useEffect(() => {
     async function getAll() {
-      const response = await fetch(`${baseUrl}/guests`);
+      const response = await fetch(`${baseUrl}/guests/`);
       const guests = await response.json();
       setAllGuests(guests);
       setLoading(false);
@@ -25,7 +25,7 @@ export default function App() {
   }, []);
 
   async function createGuest(firstName, lastName) {
-    const response = await fetch(`${baseUrl}/guests`, {
+    const response = await fetch(`${baseUrl}/guests/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
