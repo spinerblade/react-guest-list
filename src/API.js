@@ -10,10 +10,9 @@ export function GetAllUsers({ allGuests, setAllGuests }) {
     setAllGuests(allGuests.filter((allGuest) => allGuest.id !== id));
   }
   return (
-    <div data-test-id="guest" className="flex items-end gap-4 mb-6">
+    <div className="flex items-end gap-4 mb-6">
       {allGuests.map((allGuest) => (
-        <div key={allGuest.id}>
-          <h2 className="text-2xl">Guest</h2>
+        <div data-test-id="guest" key={allGuest.id}>
           <button
             aria-label={`Remove ${allGuest.firstName} ${allGuest.lastName}`}
             className="text-red-600 hover:text-red-800 font-bold px-2"

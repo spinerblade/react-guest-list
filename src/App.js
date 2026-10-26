@@ -15,9 +15,6 @@ export default function App() {
     async function getAll() {
       const response = await fetch(`${baseUrl}/guests`);
       const guests = await response.json();
-      // await new Promise((resolve) => {
-      //   setTimeout(resolve, 2000);
-      // });
       setAllGuests(guests);
       setLoading(false);
     }
@@ -38,9 +35,6 @@ export default function App() {
     const createdGuest = await response.json();
     return createdGuest;
   }
-  // if (loading) {
-  //   return <div data-test-id="Loading...">Loading...</div>;
-  // }
 
   return (
     <div className="bg-slate-400">
@@ -63,7 +57,7 @@ export default function App() {
           }}
         >
           <div className="flex flex-col">
-            <label htmlFor="First Name">Enter First Name</label>
+            <label htmlFor="First name">First name</label>
             <input
               id="First Name"
               placeholder="First Name"
@@ -75,7 +69,7 @@ export default function App() {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="Last Name">Enter Last Name</label>
+            <label htmlFor="Last name">Last name</label>
             <input
               id="Last Name"
               placeholder="Last Name"
