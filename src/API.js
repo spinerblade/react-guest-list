@@ -84,9 +84,9 @@ export function DeleteUser({ allGuests, setAllGuests }) {
         }}
       >
         <div className="flex flex-col">
-          <label htmlFor="First Name">Enter First Name</label>
+          <label htmlFor="firstNameToBeRemoved">Enter Name to delete</label>
           <input
-            id="First Name"
+            id="firstNameToBeRemoved"
             placeholder="First Name"
             value={firstNameRemove}
             onChange={(event) => {
@@ -95,9 +95,9 @@ export function DeleteUser({ allGuests, setAllGuests }) {
           />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="Last Name">Enter Last Name</label>
+          <label htmlFor="lastNameToBeRemoved">Enter Family Name</label>
           <input
-            id="Last Name"
+            id="lastNameToBeRemoved"
             placeholder="Last Name"
             value={lastNameRemove}
             onChange={(event) => {
@@ -106,11 +106,8 @@ export function DeleteUser({ allGuests, setAllGuests }) {
           />
         </div>
         <div>
-          <button
-            aria-label={`Remove ${firstNameRemove} ${lastNameRemove}`}
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-          >
-            Remove guest
+          <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+            Delete guest
           </button>
         </div>
       </form>

@@ -57,9 +57,9 @@ export default function App() {
           }}
         >
           <div className="flex flex-col">
-            <label htmlFor="First name">First name</label>
+            <label htmlFor="firstName">First name</label>
             <input
-              id="First Name"
+              id="firstName"
               placeholder="First Name"
               value={inputFirstName}
               disabled={loading}
@@ -69,9 +69,9 @@ export default function App() {
             />
           </div>
           <div className="flex flex-col">
-            <label htmlFor="Last name">Last name</label>
+            <label htmlFor="lastName">Last name</label>
             <input
-              id="Last Name"
+              id="lastName"
               placeholder="Last Name"
               value={inputLastName}
               disabled={loading}
