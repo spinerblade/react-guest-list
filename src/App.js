@@ -6,7 +6,8 @@ export default function App() {
   const [allGuests, setAllGuests] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const baseUrl = 'https://express-guest-list-api-memory.spinerblade.deno.net';
+  const baseUrl =
+    'https://express-guest-list-api-memory-data-store-exgo.onrender.com';
 
   const [inputFirstName, setInputFirstName] = useState('');
   const [inputLastName, setInputLastName] = useState('');
