@@ -2,7 +2,8 @@ import './index.css';
 import { useState } from 'react';
 
 export function GetAllUsers({ allGuests, setAllGuests }) {
-  const baseUrl = 'https://express-guest-list-api-memory.spinerblade.deno.net';
+  const baseUrl =
+    'https://express-guest-list-api-memory-data-store-exgo.onrender.com';
   async function deleteGuest(id) {
     await fetch(`${baseUrl}/guests/${id}`, {
       method: 'DELETE',
@@ -52,7 +53,8 @@ export function GetAllUsers({ allGuests, setAllGuests }) {
 }
 
 export function DeleteUser({ allGuests, setAllGuests }) {
-  const baseUrl = 'https://express-guest-list-api-memory.spinerblade.deno.net';
+  const baseUrl =
+    'https://express-guest-list-api-memory-data-store-exgo.onrender.com';
   const [firstNameRemove, setFirstNameRemove] = useState('');
   const [lastNameRemove, setLastNameRemove] = useState('');
   return (
@@ -116,7 +118,8 @@ export function DeleteUser({ allGuests, setAllGuests }) {
 }
 
 export function DeleteAllUsers({ allGuests, setAllGuests }) {
-  const baseUrl = 'https://express-guest-list-api-memory.spinerblade.deno.net';
+  const baseUrl =
+    'https://express-guest-list-api-memory-data-store-exgo.onrender.com';
 
   return (
     <div className="flex items-end gap-4 mb-6">
